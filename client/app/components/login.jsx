@@ -36,6 +36,7 @@ class Login extends React.Component {
       else {
         window.localStorage.setItem('userToken',response.data.token);
         window.localStorage.setItem('userId',response.data.user.id);
+        window.localStorage.setItem('userRole',response.data.user.role);
         window.localStorage.setItem('userEmail',response.data.user.token);
         hashHistory.push('home');
         Alert.success('You are now logged in');

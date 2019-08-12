@@ -12,70 +12,74 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    if(window.localStorage.getItem('userToken')==null) {
+    if (window.localStorage.getItem('userToken') == null) {
       hashHistory.push('login');
     }
   }
 
   handleLogout() {
-    window.localStorage.setItem('userToken','');
+    window.localStorage.setItem('userToken', '');
     Alert.success("You've been successfully logged out");
   }
 
-  render () {
+  render() {
     var that = this;
-    return(
+    const role = window.localStorage.getItem('userRole');
+
+    return (
       <div>
-      <nav className="navbar container-fluid navbar-default">
+        <nav className="navbar container-fluid navbar-default">
           {(window.localStorage.getItem('userToken')) ?
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
+                      data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
               <Link to='home' className="navbar-brand">
                 <img src="../assets/logo.png"></img>
               </Link>
-          </div>
-          :
-          <center>
-          <a className="navbar-login-logo" href="#">
-            <img src="../assets/logo.png"></img>
-          </a>
-        </center>
-        }
+            </div>
+            :
+            <div>
+              <a className="navbar-login-logo" href="#">
+                <img src="../assets/logo.png"></img>
+              </a>
+            </div>
+          }
           {(window.localStorage.getItem('userToken')) ?
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav navbar-right">
-              {(window.localStorage.getItem('userId')==1) ?
+            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul className="nav navbar-nav navbar-right">
+                {(role === 'admin') &&
                 <li><Link to="admin" className="">Admin
-                  </Link>
-                </li> :
-                ''
-              }
-             <li><Link to="article/new" className="">New Article
-              </Link>
-            </li>
-            <li>
-              <a href="" onClick={this.handleLogout} >Logout</a>
-            </li>
-            </ul>
-            <SearchForm />
-          </div>
-          : <div/>}
-      </nav>
+                </Link>
+                </li>
+                }
+                {(role === 'admin') &&
+                <li><Link to="article/new" className="">New Article
+                </Link>
+                </li>
+                }
+                <li>
+                  <a href="" onClick={this.handleLogout}>Logout</a>
+                </li>
+              </ul>
+              <SearchForm/>
+            </div>
+            : <div/>}
+        </nav>
         <div className="content container">
           {that.props.children}
-          </div>
+        </div>
         <div className="footer center-align">
           <p className="help-block">Powered by <a href="http://matterwiki.com">Matterwiki</a></p>
         </div>
-           <Alert stack={{limit: 3}} position='bottom'/>
-    </div>
+        <Alert stack={{limit: 3}} position='bottom'/>
+      </div>
 
-  );
+    );
   }
 }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
-import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 
 class Setup extends React.Component {

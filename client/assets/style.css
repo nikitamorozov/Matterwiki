@@ -105,6 +105,9 @@ padding: 0em 1em;
 .new-article .form-control {
   border: none;
 }
+select.form-control {
+    height: 48px;
+}
 .new-article textarea:hover,
 input:hover,
 textarea:active,

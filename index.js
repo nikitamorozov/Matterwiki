@@ -34,7 +34,6 @@ app.use(bodyParser.json());
 
 
 app.get('/api',function(req,res){
-  // this is just a sample endpoint I build to see if things are working
   res.send("Hey! You're looking at the matterwiki API");
 });
 
@@ -110,8 +109,7 @@ apiRoutesAdmin.use(function(req, res, next) {
           }
         });
       } else {
-        if(decoded.id == 1) {
-          // if everything is good, save to request for use in other routes
+        if(decoded.role === 'admin') {
           req.decoded = decoded;
           next();
         }

@@ -53,6 +53,7 @@ module.exports = function(app) {
                   data: {
                     user: {
                       email: user.email,
+                      role: user.role,
                       id: user.id
                     },
                     token: token
