@@ -2,6 +2,7 @@ import React from 'react';
 import Loader from './loader.jsx';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
+import errorHandler from '../errorHandler';
 
 class BrowseTopics extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class BrowseTopics extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         that.setState({topics: response.data})
       }

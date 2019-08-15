@@ -2,6 +2,7 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import errorHandler from '../errorHandler';
 
 class EditTopic extends React.Component {
 
@@ -31,7 +32,7 @@ class EditTopic extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         that.setState({name: response.data.name, description: response.data.description, loading: false})
       }
@@ -59,7 +60,7 @@ class EditTopic extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
           Alert.success('Topic has been edited');
           hashHistory.push('admin');

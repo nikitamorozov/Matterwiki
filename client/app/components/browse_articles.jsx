@@ -2,6 +2,7 @@ import React from 'react';
 import Loader from './loader.jsx';
 import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
+import errorHandler from '../errorHandler';
 
 
 class BrowseArticles extends React.Component {
@@ -26,7 +27,7 @@ class BrowseArticles extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         that.setState({articles: response.data})
       }
@@ -55,7 +56,7 @@ class BrowseArticles extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         that.setState({articles: response.data})
       }

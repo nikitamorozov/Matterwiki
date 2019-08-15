@@ -1,7 +1,8 @@
 import React from 'react';
 import Loader from './loader.jsx';
-import {hashHistory} from 'react-router';
+
 import Alert from 'react-s-alert';
+import errorHandler from '../errorHandler';
 
 class BrowseArchives extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class BrowseArchives extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         that.setState({archives: response.data})
       }

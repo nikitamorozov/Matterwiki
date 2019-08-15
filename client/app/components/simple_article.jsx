@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import errorHandler from '../errorHandler';
 
 class SimpleArticle extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class SimpleArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         that.setState({article: response.data})
       }

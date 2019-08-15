@@ -1,6 +1,7 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
+import errorHandler from '../errorHandler';
 
 class Setup extends React.Component {
 
@@ -30,7 +31,7 @@ class Setup extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
           Alert.success('Admin user generated');
           hashHistory.push('login');

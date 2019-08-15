@@ -2,6 +2,7 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import errorHandler from '../errorHandler';
 
 class EditArticle extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class EditArticle extends React.Component {
           })
           .then(function(response) {
             if(response.error.error)
-              Alert.error(response.error.message);
+              errorHandler(response);
             else {
                 Alert.success("Article has been successfully saved");
                 hashHistory.push('article/'+that.props.params.articleId);
@@ -65,7 +66,7 @@ class EditArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         that.setState({body: response.data.body, title: response.data.title, topic_id: response.data.topic_id})
       }
@@ -85,7 +86,7 @@ class EditArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         that.setState({topics: response.data})
       }

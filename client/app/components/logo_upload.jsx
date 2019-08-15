@@ -1,5 +1,6 @@
 import React from 'react';
 import Alert from 'react-s-alert';
+import errorHandler from '../errorHandler';
 
 class LogoUpload extends React.Component {
 
@@ -27,7 +28,7 @@ class LogoUpload extends React.Component {
     })
     .then(function(response) {
       if(response.error.error) {
-        Alert.error(response.error.message);
+        errorHandler(response);
       }
       else {
         Alert.success("Your logo has been successfully updated.")

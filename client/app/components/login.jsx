@@ -1,6 +1,7 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
 import Alert from 'react-s-alert';
+import errorHandler from '../errorHandler';
 
 class Login extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Login extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        Alert.error(response.error.message);
+        errorHandler(response);
       else {
         window.localStorage.setItem('userToken',response.data.token);
         window.localStorage.setItem('userId',response.data.user.id);
