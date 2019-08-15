@@ -221,7 +221,7 @@ class Admin extends React.Component {
                                 onClick={(e) => this.deleteUser(user.id, e)}>Delete</button>
                       </span> : ''}
                     <h4 className="list-group-item-heading">{user.name}</h4>
-                    <p className="list-group-item-text">{user.about}, {user.role}</p>
+                    <p className="list-group-item-text">{!!user.about ? `${user.about},` : ''} {user.role}</p>
                   </div>
                 ))}</div>
             </div>
