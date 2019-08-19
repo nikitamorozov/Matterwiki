@@ -2,6 +2,7 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import errorHandler from '../errorHandler';
 
 class EditUser extends React.Component {
 
@@ -38,7 +39,7 @@ class EditUser extends React.Component {
       })
       .then(function (response) {
         if (response.error.error)
-          Alert.error(response.error.message);
+          errorHandler(response);
         else {
           that.setState({
             name: response.data.name,
@@ -76,7 +77,7 @@ class EditUser extends React.Component {
       })
       .then(function (response) {
         if (response.error.error)
-          Alert.error(response.error.message);
+          errorHandler(response);
         else {
           Alert.success('User has been edited');
           hashHistory.push('admin');

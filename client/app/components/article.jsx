@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import errorHandler from '../errorHandler';
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class ViewArticle extends React.Component {
       .then(response => response.json())
       .then(response => {
         if (response.error.error)
-          Alert.error(response.error.message);
+          errorHandler(response);
         else {
           this.setState({article: response.data})
         }
@@ -55,7 +56,7 @@ class ViewArticle extends React.Component {
       })
       .then(function (response) {
         if (response.error.error)
-          Alert.error(response.error.message);
+          errorHandler(response);
         else {
           Alert.success("Article has been deleted");
           hashHistory.push('home');

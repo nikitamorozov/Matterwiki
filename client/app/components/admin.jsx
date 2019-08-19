@@ -3,6 +3,7 @@ import {hashHistory, Link} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 import LogoUpload from './logo_upload.jsx';
+import errorHandler from '../errorHandler';
 
 class Admin extends React.Component {
 
@@ -31,7 +32,7 @@ class Admin extends React.Component {
       })
       .then(function (response) {
         if (response.error.error)
-          Alert.error(response.error.message);
+          errorHandler(response);
         else {
           that.setState({topics: response.data, loading_topics: false})
         }
@@ -43,7 +44,7 @@ class Admin extends React.Component {
       })
       .then(function (response) {
         if (response.error.error)
-          Alert.error(response.error.message);
+          errorHandler(response);
         else {
           that.setState({users: response.data, loading_users: false})
         }
@@ -75,7 +76,7 @@ class Admin extends React.Component {
       })
       .then(function (response) {
         if (response.error.error)
-          Alert.error(response.error.message);
+          errorHandler(response);
         else {
           $('#addUser').modal('hide');
           var users = that.state.users;
@@ -108,7 +109,7 @@ class Admin extends React.Component {
       .then(function (response) {
         if (response.error.error) {
           $('#addTopic').modal('hide');
-          Alert.error(response.error.message);
+          errorHandler(response);
         } else {
           $('#addTopic').modal('hide');
           var topics = that.state.topics;
@@ -137,7 +138,7 @@ class Admin extends React.Component {
       })
       .then(function (response) {
         if (response.error.error)
-          Alert.error(response.error.message);
+          errorHandler(response);
         else {
           topics = that.state.topics
           var topics = $.grep(topics, function (e) {
@@ -170,7 +171,7 @@ class Admin extends React.Component {
         })
         .then(function (response) {
           if (response.error.error)
-            Alert.error(response.error.message);
+            errorHandler(response);
           else {
             users = that.state.users
             var users = $.grep(users, function (e) {
@@ -221,7 +222,7 @@ class Admin extends React.Component {
                                 onClick={(e) => this.deleteUser(user.id, e)}>Delete</button>
                       </span> : ''}
                     <h4 className="list-group-item-heading">{user.name}</h4>
-                    <p className="list-group-item-text">{!!user.about ? `${user.about},` : ''} {user.role}</p>
+                    <p className="list-group-item-text">{(user.about && user.about.length) ? `${user.about},` : ''} {user.role}</p>
                   </div>
                 ))}</div>
             </div>
